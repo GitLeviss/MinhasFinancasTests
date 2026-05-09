@@ -362,3 +362,17 @@ Configuration/Implementations/AmbienteMiddleware.cs
 
 
 
+
+MinhasFinancas.API/
+
+MinhasFinancas.Application/
+
+MinhasFinancas.Domain/
+
+MinhasFinancas.Infrastructure/
+
+Dockerfile
+
+MinhasFinancas.slnx
+
+nuget.config
