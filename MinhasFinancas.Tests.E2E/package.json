@@ -1,0 +1,23 @@
+{
+  "name": "minhasfinancas.tests.e2e",
+  "version": "1.0.0",
+  "description": "E2E tests for MinhasFinancas project",
+  "type": "module",
+  "scripts": {
+    "test:e2e": "vitest run",
+    "test:e2e:ui": "vitest --ui",
+    "test:e2e:watch": "vitest",
+    "test:e2e:debug": "vitest --inspect-brk --no-coverage --single-thread"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0",
+    "@vitest/ui": "^1.0.0"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0"
+  }
+  
+}
