@@ -19,5 +19,4 @@ export class CategoriaLocators {
         return this.page.locator('//button[normalize-space(text())=\'Salvar\']');
     }
 
-    //Categoria salva com sucesso!
 }

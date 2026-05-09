@@ -26,14 +26,15 @@ export class TransacoesPage {
         , data: string
         , tipo: string
         , pessoa: string
-        , categoria: string): Promise<void>
-    {
+        , categoria: string): Promise<void> {
         await Actions.fillAsync(this.locators.inputDescricao, descricao);
         await Actions.fillAsync(this.locators.inputValor, valor);
         await Actions.fillAsync(this.locators.inputData, data);
         await Actions.selectOptionAsync(this.locators.selectTipo, tipo);
-        await Actions.selectOptionAsync(this.locators.selectPessoa, pessoa);
-        await Actions.selectOptionAsync(this.locators.selectCategoria, categoria);
+        await Actions.fillAsync(this.locators.selectPessoa, pessoa);
+        await Actions.clickAsync(this.locators.pessoa(pessoa));
+        await Actions.fillAsync(this.locators.selectCategoria, categoria);
+        await Actions.clickAsync(this.locators.categoria(categoria));
     }
 
 

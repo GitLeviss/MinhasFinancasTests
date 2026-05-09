@@ -19,7 +19,7 @@ const testSuite = new PessoaTests();
 describe.sequential('Suíte de Cadastro de Pessoa', () => {
   beforeEach(async () => {
     await testSuite.setupBeforeEach();    
-    await testSuite.pessoaPage.navegarParaCadastro();
+    await testSuite.pessoaPage.navegarParaPessoas();
   });
 
   afterEach(async () => {

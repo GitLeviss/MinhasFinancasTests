@@ -12,7 +12,7 @@ export class Validators {
   static async toBeVisibleAsync(locator: Locator): Promise<void> {
     await expect(locator).toBeVisible();
   }
-
+  
   static async notToBeVisibleAsync(locator: Locator): Promise<void> {
     await expect(locator).not.toBeVisible();
   }

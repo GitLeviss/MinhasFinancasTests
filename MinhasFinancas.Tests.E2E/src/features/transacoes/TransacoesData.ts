@@ -2,10 +2,13 @@ export class TransacoesData {
     static readonly transacaoValida = {
         descricao: 'Transação Teste Automatizado ' + Math.floor(Math.random() * 9999),
         valor: '100.00',
-        dataTransacao: '2024-06-01',
-        tipo: 'despesa',
+        dataTransacao: new Date().toISOString().split('T')[0],
+        tipoDespesa: 'despesa',
+        tipoReceita: 'receita',
         pessoa: 'Pessoa Teste',
-        categoriaReceita: 'Alimentação'
+        pessoaMenor: 'Teste Menor Idade',
+        categoriaReceita: 'Salário',
+        categoriaDespesa: 'Alimentação'
     };
 
 }

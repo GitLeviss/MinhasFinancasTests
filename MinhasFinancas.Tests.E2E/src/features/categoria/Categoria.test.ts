@@ -19,7 +19,7 @@ const testSuite = new CategoriaTests();
 describe.sequential('Suíte de Cadastro de Categoria', () => {
   beforeEach(async () => {
     await testSuite.setupBeforeEach();    
-    await testSuite.categoriaPage.navegarParaCadastro();
+    await testSuite.categoriaPage.navegarParaCategorias();
   });
 
   afterEach(async () => {

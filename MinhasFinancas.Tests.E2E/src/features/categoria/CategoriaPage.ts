@@ -9,7 +9,7 @@ export class CategoriaPage {
     this.locators = new CategoriaLocators(this.page);
   }
 
-  async navegarParaCadastro(): Promise<void> {
+  async navegarParaCategorias(): Promise<void> {
     await this.page.goto('http://localhost:5173/categorias');
   }
 
@@ -21,6 +21,7 @@ export class CategoriaPage {
   async preencherFormulario(descricao: string, finalidade: string): Promise<void> {    
     await Actions.fillAsync(this.locators.descricao, descricao);
     await Actions.selectOptionAsync(this.locators.selectFinalidade, finalidade);
+    
   }
 
 

@@ -9,7 +9,7 @@ export class PessoaPage {
     this.locators = new PessoaLocators(this.page);
   }
 
-  async navegarParaCadastro(): Promise<void> {
+  async navegarParaPessoas(): Promise<void> {
     await this.page.goto('http://localhost:5173/pessoas');
   }
 
