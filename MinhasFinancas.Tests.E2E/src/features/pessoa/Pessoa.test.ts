@@ -3,12 +3,14 @@ import { TestRun } from '@base/TestRun';
 import { PessoaPage } from './PessoaPage';
 import { PessoaData } from './PessoaData';
 import { Validators } from '@base/Validators';
+import { TransacoesData } from '@features/transacoes/TransacoesData';
 
 class PessoaTests extends TestRun {
   public pessoaPage!: PessoaPage;
 
+
   override async setupBeforeEach(): Promise<void> {
-    await super.setupBeforeEach(); 
+    await super.setupBeforeEach();
     this.pessoaPage = new PessoaPage(this.page);
   }
 }
@@ -18,7 +20,7 @@ const testSuite = new PessoaTests();
 
 describe.sequential('Suíte de Cadastro de Pessoa', () => {
   beforeEach(async () => {
-    await testSuite.setupBeforeEach();    
+    await testSuite.setupBeforeEach();
     await testSuite.pessoaPage.navegarParaPessoas();
   });
 
@@ -28,7 +30,7 @@ describe.sequential('Suíte de Cadastro de Pessoa', () => {
 
   it('1. Deve cadastrar uma nova pessoa com sucesso', async () => {
     const data = PessoaData.pessoaValida;
-    
+
     await testSuite.pessoaPage.clicarEmAdicionarPessoa();
     await testSuite.pessoaPage.preencherFormulario(data.nome, data.idade);
     await testSuite.pessoaPage.clicarEmSalvar();
@@ -40,7 +42,7 @@ describe.sequential('Suíte de Cadastro de Pessoa', () => {
     const data = PessoaData.pessoaValida;
     await Validators.toBeVisibleAsync(testSuite.page.locator(`//td[normalize-space(text())='${data.nome}']`));
   });
-  
+
 
   it('3. Deve editar uma nova pessoa com sucesso', async () => {
     const data = PessoaData.pessoaValidaEdicao;
@@ -55,7 +57,8 @@ describe.sequential('Suíte de Cadastro de Pessoa', () => {
   it('4. Deve excluir uma pessoa com sucesso', async () => {
     const data = PessoaData.pessoaValidaEdicao;
     await testSuite.pessoaPage.clicarEmExcluir(data.nome);
-    await Validators.notToBeVisibleAsync(testSuite.page.locator(`//td[normalize-space(text())='${data.nome}']`));  
+    await Validators.notToBeVisibleAsync(testSuite.page.locator(`//td[normalize-space(text())='${data.nome}']`));
   });
+
 
 });

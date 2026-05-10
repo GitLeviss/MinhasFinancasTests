@@ -1,14 +1,32 @@
-import { describe, it, beforeEach, afterEach } from 'vitest';
-import { TestRun } from '@base/TestRun';
+import { describe, it, beforeEach, beforeAll, afterEach } from 'vitest'; import { TestRun } from '@base/TestRun';
 import { Validators } from '@base/Validators';
 import { TransacoesPage } from './TransacoesPage';
 import { TransacoesData } from './TransacoesData';
+import { PessoaData } from '@features/pessoa/PessoaData';
+import { PessoaPage } from '@features/pessoa/PessoaPage';
 
 class TransacoesTests extends TestRun {
   public transacoesPage!: TransacoesPage;
+  public pessoaPage!: PessoaPage;
+
+
+
+  async setupBeforeAll(): Promise<void> {
+    await testSuite.setupBeforeEach();
+    
+    this.pessoaPage = new PessoaPage(this.page);
+    
+    const data = PessoaData.pessoaTesteCascata;
+    await testSuite.pessoaPage.navegarParaPessoas();
+    await testSuite.pessoaPage.clicarEmAdicionarPessoa();
+    await testSuite.pessoaPage.preencherFormulario(data.nome, data.idade);
+    await testSuite.pessoaPage.clicarEmSalvar();
+
+    await Validators.GetByTextAsync(testSuite.page, 'Pessoa salva com sucesso!');
+  }
 
   override async setupBeforeEach(): Promise<void> {
-    await super.setupBeforeEach(); 
+    await super.setupBeforeEach();
     this.transacoesPage = new TransacoesPage(this.page);
   }
 }
@@ -17,8 +35,14 @@ class TransacoesTests extends TestRun {
 const testSuite = new TransacoesTests();
 
 describe.sequential('Suíte de Cadastro de Transações', () => {
+
+  beforeAll(async () => {
+    await testSuite.setupBeforeAll();
+  });
+
+
   beforeEach(async () => {
-    await testSuite.setupBeforeEach();    
+    await testSuite.setupBeforeEach();
     await testSuite.transacoesPage.navegarParaCadastro();
   });
 
@@ -28,7 +52,7 @@ describe.sequential('Suíte de Cadastro de Transações', () => {
 
   it('1. Deve cadastrar uma nova pessoa com sucesso', async () => {
     const data = TransacoesData.transacaoValida;
-    
+
     await testSuite.transacoesPage.clicarEmAdicionarTransacao();
     await testSuite.transacoesPage.preencherFormularioTransacao(data.descricao
       , data.valor
@@ -45,10 +69,10 @@ describe.sequential('Suíte de Cadastro de Transações', () => {
     const data = TransacoesData.transacaoValida;
     await Validators.toBeVisibleAsync(testSuite.page.locator(`//td[normalize-space(text())='${data.descricao}']`));
   });
-  
+
   it('3. Não Deve cadastrar transação do tipo despesa em receita', async () => {
     const data = TransacoesData.transacaoValida;
-    
+
     await testSuite.transacoesPage.clicarEmAdicionarTransacao();
     await testSuite.transacoesPage.preencherFormularioTransacao(data.descricao
       , data.valor
@@ -63,7 +87,7 @@ describe.sequential('Suíte de Cadastro de Transações', () => {
 
   it('4. Não Deve cadastrar transação do tipo receita em despesa', async () => {
     const data = TransacoesData.transacaoValida;
-    
+
     await testSuite.transacoesPage.clicarEmAdicionarTransacao();
     await testSuite.transacoesPage.preencherFormularioTransacao(data.descricao
       , data.valor
@@ -78,7 +102,7 @@ describe.sequential('Suíte de Cadastro de Transações', () => {
 
   it('5. Não Deve cadastrar transação do tipo receita para pessoa menor de idade', async () => {
     const data = TransacoesData.transacaoValida;
-    
+
     await testSuite.transacoesPage.clicarEmAdicionarTransacao();
     await testSuite.transacoesPage.preencherFormularioTransacao(data.descricao
       , data.valor
@@ -91,6 +115,16 @@ describe.sequential('Suíte de Cadastro de Transações', () => {
   });
 
 
+  it('6. Deve excluir transações ao excluir uma pessoa', async () => {
+    const data = PessoaData.pessoaTesteCascata;
+    const dataTransacao = TransacoesData.transacaoValida;
+
+    await testSuite.pessoaPage.clicarEmExcluir(data.nome);
+    await Validators.notToBeVisibleAsync(testSuite.page.locator(`//td[normalize-space(text())='${data.nome}']`));
+    await testSuite.page.goto('http://localhost:5173/transacoes');
+    await Validators.notToBeVisibleAsync(testSuite.page.locator(`//td[normalize-space(text())='${dataTransacao.descricao}']`));
+
+  });
 
 
 });

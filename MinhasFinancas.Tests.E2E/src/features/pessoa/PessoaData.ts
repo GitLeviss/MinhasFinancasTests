@@ -7,5 +7,10 @@
       nome: 'João Editado ' + Math.floor(Math.random() * 9999),
       idade: '2005-02-19'
     };
+    static readonly pessoaTesteCascata = {
+      nome: 'Pessoa Teste',
+      idade: '2003-01-29'
+    };
+
 
   }
