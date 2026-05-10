@@ -44,11 +44,11 @@ N/A
 
 Resposta da API:
 
-![Imagem](images/image_6.png)
+![Imagem](image_6.png)
 
 Evidência de tela:
 
-![Imagem](images/image_4.png)
+![Imagem](image_4.png)
 
 
 
@@ -88,7 +88,7 @@ N/A
 
 Evidência de tela:
 
-![Imagem](images/image_3.png)
+![Imagem](image_3.png)
 
 
 Bug03 – Sistema não exibe pessoa e categoria vinculada a transação na tabela de transações
@@ -126,7 +126,7 @@ N/A
 
 Evidência de tela:
 
-![Imagem](images/image_2.png)
+![Imagem](image_2.png)
 
 
 Bug04 – Sistema não salva transação com categoria ambas pelo front ao selecionar categoria Ambas, front end não está mapeando categoria correta ao enviar requisição para o backend.
@@ -166,15 +166,15 @@ Resposta da API:
 
 Descrição de categoria AMBAS
 
-![Imagem](images/image_1.png)
+![Imagem](image_1.png)
 
 Categoria ambas tendo a mesma finalidade da categoria mockada no sistema
 
-![Imagem](images/image_7.png)
+![Imagem](image_7.png)
 
 Evidência de tela:
 
-![Imagem](images/image_5.png)
+![Imagem](image_5.png)
 
 
 Bug05 – Sistema não implementa regra de exclusão em cascata na service de pessoas.
